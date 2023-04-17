@@ -18,5 +18,5 @@ export default {
 
 <template>
   <SiteHeader></SiteHeader>
-  <SiteMain :array="store"></SiteMain>
+  <SiteMain ></SiteMain>
 </template>
