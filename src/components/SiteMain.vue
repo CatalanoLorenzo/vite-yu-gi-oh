@@ -7,7 +7,7 @@ export default {
     data() {
         return {
             store,
-            typeSelect: null,
+            typeSelect: '',
         }
     },
     methods: {
@@ -37,23 +37,25 @@ export default {
             }
 
         } */
-
+        switchSelect(event) {
+      this.typeSelect = event.target.value;
     },
-    computed:{
         searchForType() {
-            if (this.typeSelect != null) {
-                return toString(this.store.urlApi += '&type=' + this.typeSelect)
+            if (this.typeSelect != '') {
+                return this.store.urlApi += '&type=' + this.typeSelect
             }
             else {
                 return this.store.urlApi
             }
-
+    
         }
+    },
+    computed:{
     }
     ,
     mounted() {
-        console.log(searchForType);
-        this.listCards(searchForType)
+        console.log(this.searchForType());
+        this.listCards(this.searchForType())
     }
 
 }
@@ -63,7 +65,7 @@ export default {
     <main>
 
         <section class="search">
-            <select name="" id="" v-model="this.typeSelect">
+            <select name="" id=""   @change="switchSelect($event)">
                 <option v-for="types in this.store.listCardsTypes" :value="types">{{ types }}</option>
             </select>
             <div>{{ this.typeSelect }}</div>
